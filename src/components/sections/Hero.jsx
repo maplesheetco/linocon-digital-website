@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 
 const cards = [
   { eyebrow: 'Built for you', title: 'Website Builder', desc: 'Fast, conversion-ready pages', rotate: '-rotate-6', pos: 'top-4 left-2 md:left-0', tint: false },
@@ -39,12 +40,12 @@ export default function Hero() {
           </p>
 
           <div className="flex items-center gap-7 flex-wrap">
-            <a
-              href="#contact"
+            <Link
+              to="/book"
               className="flex items-center h-14 px-7 rounded-full bg-gradient-brand text-ink text-base font-bold"
             >
               Book a Strategy Call
-            </a>
+            </Link>
             <a href="#process" className="flex items-center gap-2 text-base font-bold">
               See how we work
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">

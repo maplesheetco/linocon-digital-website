@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Reveal from '../Reveal'
 
 export default function CTA() {
@@ -11,12 +12,12 @@ export default function CTA() {
         <p className="text-lg md:text-xl text-text-secondary max-w-lg">
           Book a free strategy call &mdash; we&#39;ll show you exactly where the leverage is.
         </p>
-        <a
-          href="mailto:hello@linocondigital.com"
+        <Link
+          to="/book"
           className="flex items-center h-14 px-8 rounded-full bg-gradient-brand text-ink text-base font-bold"
         >
           Book a Strategy Call
-        </a>
+        </Link>
       </Reveal>
     </section>
   )

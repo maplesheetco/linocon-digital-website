@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Logo } from './Logo'
 
 const LINKS = [
@@ -43,12 +44,12 @@ export default function Nav() {
           ))}
         </nav>
 
-        <a
-          href="#contact"
+        <Link
+          to="/book"
           className="hidden sm:flex items-center h-11 px-6 rounded-full bg-gradient-brand text-ink text-sm font-bold whitespace-nowrap"
         >
           Book a Strategy Call
-        </a>
+        </Link>
       </div>
     </header>
   )

@@ -8,10 +8,39 @@
     <meta name="description" content="LinoCon Digital builds fast, conversion-ready websites and backs them with the SEO setup and backlinks that move you up Google." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+      html, body { margin: 0; background: #0B0B10; }
+      #splash {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #splash svg { animation: splash-pulse 1.4s ease-in-out infinite; }
+      @keyframes splash-pulse {
+        0%, 100% { opacity: 0.45; }
+        50% { opacity: 1; }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div id="splash" aria-hidden="true">
+        <svg width="40" height="32" viewBox="0 0 30 24" fill="none">
+          <defs>
+            <linearGradient id="splashGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#2E6BFF" />
+              <stop offset="100%" stop-color="#FF6A3D" />
+            </linearGradient>
+          </defs>
+          <path d="M2 20 L9 9" stroke="url(#splashGradient)" stroke-width="4" stroke-linecap="round" />
+          <path d="M11 20 L18 5" stroke="url(#splashGradient)" stroke-width="4" stroke-linecap="round" />
+          <path d="M20 20 L28 2" stroke="url(#splashGradient)" stroke-width="4" stroke-linecap="round" />
+        </svg>
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

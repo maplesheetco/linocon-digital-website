@@ -1,8 +1,8 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 
 export default function Reveal({
   children,
-  as: Component = motion.div,
+  as: Component = m.div,
   delay = 0,
   y = 28,
   className = '',

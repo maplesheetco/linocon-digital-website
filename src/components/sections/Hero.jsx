@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
 const cards = [
@@ -14,7 +14,7 @@ export default function Hero() {
       <div className="pointer-events-none absolute top-16 -right-48 w-[620px] h-[620px] rounded-full bg-orange opacity-15 blur-[140px]" />
 
       <div className="relative max-w-6xl mx-auto px-6 md:px-10 grid md:grid-cols-2 gap-8 items-center">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -59,9 +59,9 @@ export default function Hero() {
               </svg>
             </a>
           </div>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
@@ -83,7 +83,7 @@ export default function Hero() {
               <p className="text-sm text-text-secondary mt-2">{c.desc}</p>
             </div>
           ))}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

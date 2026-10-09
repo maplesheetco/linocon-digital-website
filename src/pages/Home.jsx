@@ -1,6 +1,7 @@
 import Hero from '../components/sections/Hero'
 import Statement from '../components/sections/Statement'
 import Services from '../components/sections/Services'
+import Work from '../components/sections/Work'
 import Included from '../components/sections/Included'
 import Process from '../components/sections/Process'
 import Audit from '../components/sections/Audit'
@@ -13,6 +14,7 @@ export default function Home() {
       <Hero />
       <Statement />
       <Services />
+      <Work />
       <Included />
       <Process />
       <Audit />

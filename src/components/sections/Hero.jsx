@@ -32,9 +32,12 @@ export default function Hero() {
         <div className="pointer-events-none absolute -top-40 -left-40 w-[560px] h-[560px] rounded-full bg-blue opacity-20 blur-[120px]" />
         <div className="pointer-events-none absolute top-16 -right-48 w-[620px] h-[620px] rounded-full bg-orange opacity-15 blur-[140px]" />
 
+        {/* Slide only, no fade: the headline is the page's largest element, and
+            starting it at opacity 0 kept it invisible to visitors (and to
+            Google's "largest paint" timing) until the animation finished. */}
         <m.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 24 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="relative w-full"
         >

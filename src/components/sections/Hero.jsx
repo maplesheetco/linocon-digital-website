@@ -14,9 +14,12 @@ export default function Hero() {
       <div className="pointer-events-none absolute top-16 -right-48 w-[620px] h-[620px] rounded-full bg-orange opacity-15 blur-[140px]" />
 
       <div className="relative max-w-6xl mx-auto px-6 md:px-10 grid md:grid-cols-2 gap-8 items-center">
+        {/* Slide only, no fade: the headline is the page's largest element, and
+            starting it at opacity 0 kept it invisible to visitors (and to
+            Google's "largest paint" timing) until the animation finished. */}
         <m.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 24 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-start gap-7"
         >

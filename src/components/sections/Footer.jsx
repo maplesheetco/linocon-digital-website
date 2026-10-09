@@ -28,6 +28,7 @@ export default function Footer() {
               hello@linocondigital.com
             </a>
             <Link to="/book" className="text-sm text-text-secondary">Book a strategy call</Link>
+            <Link to="/articles" className="text-sm text-text-secondary">Articles</Link>
           </div>
         </div>
         <div className="flex items-center justify-between flex-wrap gap-3 pt-7 border-t border-border">

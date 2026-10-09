@@ -7,7 +7,7 @@ import {
   useReducedMotion,
 } from 'framer-motion'
 import Reveal from '../Reveal'
-import { BrowserVisual, LinksVisual, SeoVisual } from '../visuals'
+import { LinksVisual, SeoVisual, WebVisual } from '../visuals'
 
 const SERVICES = [
   {
@@ -15,7 +15,7 @@ const SERVICES = [
     title: 'Sites built to convert, not just exist.',
     body: 'Custom-built websites that load fast and turn visitors into leads. Not another templated theme.',
     points: ['Custom design for your brand', 'Built mobile-first', 'Enquiry forms and call booking built in'],
-    Visual: BrowserVisual,
+    Visual: WebVisual,
   },
   {
     kicker: '02 — SEO Setup',

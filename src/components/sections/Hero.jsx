@@ -83,17 +83,17 @@ export default function Hero() {
             reduce ? 'relative mt-16 mb-24' : 'absolute inset-0 pt-24 pointer-events-none'
           } w-full flex items-center justify-center px-4 md:px-10`}
         >
-          <div className="relative w-full max-w-4xl">
+          <div className="relative w-full max-w-5xl">
             <HeroDevice />
             <m.div
               style={motionStyle({ opacity: badgeOpacity, y: badgeY })}
-              className="absolute -top-6 left-2 md:-left-10"
+              className="absolute -top-6 left-0 md:-left-10 scale-75 md:scale-100 origin-top-left"
             >
               <RankBadge />
             </m.div>
             <m.div
               style={motionStyle({ opacity: leadOpacity, y: leadY })}
-              className="absolute -bottom-6 right-2 md:-right-10"
+              className="absolute -bottom-6 right-0 md:-right-10 scale-75 md:scale-100 origin-bottom-right"
             >
               <LeadNotification />
             </m.div>

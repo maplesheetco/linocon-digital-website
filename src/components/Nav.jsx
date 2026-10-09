@@ -38,7 +38,7 @@ export default function Nav() {
           <Logo />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-10">
+        <nav className="hidden lg:flex items-center gap-8">
           {LINKS.map((l) => (
             <a
               key={l.href}
@@ -48,6 +48,12 @@ export default function Nav() {
               {l.label}
             </a>
           ))}
+          <Link
+            to="/articles"
+            className="text-sm font-semibold text-text-secondary hover:text-text transition-colors"
+          >
+            Articles
+          </Link>
         </nav>
 
         <div className="flex items-center gap-2">
@@ -63,7 +69,7 @@ export default function Nav() {
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
             aria-label={open ? 'Close menu' : 'Open menu'}
-            className="md:hidden w-10 h-10 flex items-center justify-center rounded-full border border-white/15"
+            className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-white/15"
           >
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
               {open ? (
@@ -77,17 +83,20 @@ export default function Nav() {
       </div>
 
       {open && (
-        <nav className="md:hidden border-t border-border px-5 pb-6 pt-2 flex flex-col">
+        <nav className="lg:hidden border-t border-border px-5 pb-6 pt-2 flex flex-col">
           {LINKS.map((l) => (
             <a
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="py-4 text-lg font-semibold border-b border-border last:border-0"
+              className="py-4 text-lg font-semibold border-b border-border"
             >
               {l.label}
             </a>
           ))}
+          <Link to="/articles" className="py-4 text-lg font-semibold">
+            Articles
+          </Link>
         </nav>
       )}
     </header>

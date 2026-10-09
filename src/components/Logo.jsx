@@ -18,7 +18,7 @@ export function Logo({ dark = false }) {
   return (
     <div className="flex items-center gap-3">
       <Mark />
-      <span className={`font-display text-xl font-bold ${dark ? 'text-ink' : 'text-text'}`}>
+      <span className={`font-display text-lg sm:text-xl font-bold whitespace-nowrap ${dark ? 'text-ink' : 'text-text'}`}>
         LinoCon Digital
       </span>
     </div>

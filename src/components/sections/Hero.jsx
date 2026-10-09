@@ -14,9 +14,9 @@ export default function Hero() {
   const textOpacity = useScrollRange(scrollYProgress, [0, 0.18], [1, 0])
   const textScale = useScrollRange(scrollYProgress, [0, 0.18], [1, 0.92])
   const textY = useScrollRange(scrollYProgress, [0, 0.18], [0, -80])
-  const deviceY = useScrollRange(scrollYProgress, [0, 0.55], ['72%', '0%'])
+  const deviceY = useScrollRange(scrollYProgress, [0, 0.55], ['45vh', '0vh'])
   const deviceScale = useScrollRange(scrollYProgress, [0, 0.55], [0.82, 1])
-  const deviceOpacity = useScrollRange(scrollYProgress, [0, 0.12, 0.3], [0.5, 0.5, 1])
+  const deviceOpacity = useScrollRange(scrollYProgress, [0.04, 0.22], [0, 1])
   const badgeOpacity = useScrollRange(scrollYProgress, [0.55, 0.7], [0, 1])
   const badgeY = useScrollRange(scrollYProgress, [0.55, 0.7], [24, 0])
   const leadOpacity = useScrollRange(scrollYProgress, [0.68, 0.82], [0, 1])
@@ -49,10 +49,12 @@ export default function Hero() {
               </span>
             </div>
 
-            <h1 className="font-display font-bold text-5xl sm:text-6xl md:text-8xl leading-[1.02] text-balance">
-              Growth isn&#39;t luck.
+            <h1 className="font-display font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.02] text-balance">
+              Get found.
               <br />
-              It&#39;s a <span className="text-gradient">system.</span>
+              Get chosen.
+              <br />
+              Get <span className="text-gradient">growing.</span>
             </h1>
 
             <p className="text-lg md:text-xl leading-relaxed text-text-secondary max-w-2xl text-balance">

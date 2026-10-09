@@ -9,7 +9,10 @@ export default function Footer() {
           <div className="flex flex-col gap-4">
             <Logo />
             <p className="text-sm text-text-tertiary max-w-xs">
-              Websites, SEO, and backlinks for brands that want a system, not a scramble.
+              <span className="block font-display font-bold text-base text-text mb-1">
+                Get found. Get chosen. Get growing.
+              </span>
+              Websites, SEO and backlinks for businesses that want more customers.
             </p>
           </div>
           <div className="flex flex-col gap-3">

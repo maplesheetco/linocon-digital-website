@@ -1,89 +1,109 @@
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { m, useScroll, useReducedMotion } from 'framer-motion'
+import { useScrollRange } from '../../lib/scroll'
 import { Link } from 'react-router-dom'
+import { HeroDevice, LeadNotification, RankBadge } from '../visuals'
 
-const cards = [
-  { eyebrow: 'Built for you', title: 'Website Builder', desc: 'Fast, conversion-ready pages', rotate: '-rotate-6', pos: 'top-4 left-2 md:left-0', tint: false },
-  { eyebrow: 'Technical', title: 'SEO Setup', desc: 'Rankings that stick', rotate: 'rotate-3', pos: 'top-52 left-32 md:left-36', tint: false, z: 'z-10' },
-  { eyebrow: 'Authority', title: 'Backlinks', desc: 'Links that actually count', rotate: 'rotate-6', pos: 'top-8 right-0', tint: true },
-]
-
+// Apple-style opener: the headline is pinned while you scroll, then fades
+// back as the site preview rises up and fills the screen.
 export default function Hero() {
+  const ref = useRef(null)
+  const reduce = useReducedMotion()
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
+
+  const textOpacity = useScrollRange(scrollYProgress, [0, 0.18], [1, 0])
+  const textScale = useScrollRange(scrollYProgress, [0, 0.18], [1, 0.92])
+  const textY = useScrollRange(scrollYProgress, [0, 0.18], [0, -80])
+  const deviceY = useScrollRange(scrollYProgress, [0, 0.55], ['45vh', '0vh'])
+  const deviceScale = useScrollRange(scrollYProgress, [0, 0.55], [0.82, 1])
+  const deviceOpacity = useScrollRange(scrollYProgress, [0.04, 0.22], [0, 1])
+  const badgeOpacity = useScrollRange(scrollYProgress, [0.55, 0.7], [0, 1])
+  const badgeY = useScrollRange(scrollYProgress, [0.55, 0.7], [24, 0])
+  const leadOpacity = useScrollRange(scrollYProgress, [0.68, 0.82], [0, 1])
+  const leadY = useScrollRange(scrollYProgress, [0.68, 0.82], [24, 0])
+
+  const motionStyle = (style) => (reduce ? undefined : style)
+
   return (
-    <section id="top" className="relative overflow-hidden pt-40 pb-32 md:pt-48 md:pb-40">
-      <div className="pointer-events-none absolute -top-40 -left-40 w-[560px] h-[560px] rounded-full bg-blue opacity-20 blur-[120px]" />
-      <div className="pointer-events-none absolute top-16 -right-48 w-[620px] h-[620px] rounded-full bg-orange opacity-15 blur-[140px]" />
+    <section ref={ref} id="top" className={reduce ? 'relative' : 'relative h-[260vh]'}>
+      <div
+        className={`${reduce ? '' : 'sticky top-0 h-svh'} overflow-hidden flex flex-col items-center`}
+      >
+        <div className="pointer-events-none absolute -top-40 -left-40 w-[560px] h-[560px] rounded-full bg-blue opacity-20 blur-[120px]" />
+        <div className="pointer-events-none absolute top-16 -right-48 w-[620px] h-[620px] rounded-full bg-orange opacity-15 blur-[140px]" />
 
-      <div className="relative max-w-6xl mx-auto px-6 md:px-10 grid md:grid-cols-2 gap-8 items-center">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
+        {/* Slide only, no fade: the headline is the page's largest element, and
+            starting it at opacity 0 kept it invisible to visitors (and to
+            Google's "largest paint" timing) until the animation finished. */}
+        <m.div
+          initial={{ y: 24 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col items-start gap-7"
+          className="relative w-full"
         >
-          <div className="flex items-center gap-2.5 px-4 py-2 rounded-full border border-white/15">
-            <span className="w-1.5 h-1.5 rounded-full bg-orange" />
-            <span className="text-xs font-bold tracking-widest text-text-secondary uppercase">
-              Websites, SEO &amp; backlinks
-            </span>
-          </div>
-
-          <h1 className="font-display font-bold text-5xl md:text-7xl leading-[1.03]">
-            Growth isn&#39;t luck.
-            <br />
-            It&#39;s a <span className="text-gradient">system.</span>
-          </h1>
-
-          <p className="text-lg md:text-xl leading-relaxed text-text-secondary max-w-lg">
-            LinoCon Digital builds fast, conversion-ready websites and backs them with the SEO
-            setup and backlinks that actually move you up Google &mdash; one team, one system, no
-            guesswork.
-          </p>
-
-          <div className="flex items-center gap-7 flex-wrap">
-            <Link
-              to="/book"
-              className="flex items-center h-14 px-7 rounded-full bg-gradient-brand text-ink text-base font-bold"
-            >
-              Book a Strategy Call
-            </Link>
-            <a href="#process" className="flex items-center gap-2 text-base font-bold">
-              See how we work
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path
-                  d="M3 8h10M9 4l4 4-4 4"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="relative h-[440px] hidden md:block"
-        >
-          {cards.map((c) => (
-            <div
-              key={c.title}
-              className={`absolute w-64 p-6 rounded-3xl border border-white/10 shadow-2xl ${c.rotate} ${c.pos} ${c.z ?? ''} ${
-                c.tint
-                  ? 'bg-gradient-to-br from-blue/20 to-orange/15'
-                  : 'bg-surface'
-              }`}
-            >
-              <span className="text-xs font-bold tracking-widest uppercase text-text-secondary">
-                {c.eyebrow}
+          <m.div
+            style={motionStyle({ opacity: textOpacity, scale: textScale, y: textY })}
+            className="max-w-4xl mx-auto px-6 pt-32 md:pt-40 flex flex-col items-center text-center gap-6 md:gap-7"
+          >
+            <div className="flex items-center gap-2.5 px-4 py-2 rounded-full border border-white/15">
+              <span className="w-1.5 h-1.5 rounded-full bg-orange" />
+              <span className="text-xs font-bold tracking-widest text-text-secondary uppercase">
+                Websites, SEO &amp; backlinks
               </span>
-              <div className="font-display text-2xl font-bold mt-2.5">{c.title}</div>
-              <p className="text-sm text-text-secondary mt-2">{c.desc}</p>
             </div>
-          ))}
-        </motion.div>
+
+            <h1 className="font-display font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.02] text-balance">
+              Get found.
+              <br />
+              Get chosen.
+              <br />
+              Get <span className="text-gradient">growing.</span>
+            </h1>
+
+            <p className="text-lg md:text-xl leading-relaxed text-text-secondary max-w-2xl text-balance">
+              We build fast websites that turn visitors into enquiries, then get them found on
+              Google with proper SEO and backlinks. One team, one system, no guesswork.
+            </p>
+
+            <div className="flex items-center justify-center gap-4 flex-wrap">
+              <Link
+                to="/book"
+                className="flex items-center h-14 px-7 rounded-full bg-gradient-brand text-ink text-base font-bold"
+              >
+                Book a free strategy call
+              </Link>
+              <a
+                href="#audit"
+                className="flex items-center h-14 px-7 rounded-full border border-white/20 text-base font-bold hover:bg-white/5 transition-colors"
+              >
+                Get a free audit
+              </a>
+            </div>
+          </m.div>
+        </m.div>
+
+        <m.div
+          style={motionStyle({ y: deviceY, scale: deviceScale, opacity: deviceOpacity })}
+          className={`${
+            reduce ? 'relative mt-16 mb-24' : 'absolute inset-0 pt-24 pointer-events-none'
+          } w-full flex items-center justify-center px-4 md:px-10`}
+        >
+          <div className="relative w-full max-w-5xl">
+            <HeroDevice />
+            <m.div
+              style={motionStyle({ opacity: badgeOpacity, y: badgeY })}
+              className="absolute -top-6 left-0 md:-left-10 scale-75 md:scale-100 origin-top-left"
+            >
+              <RankBadge />
+            </m.div>
+            <m.div
+              style={motionStyle({ opacity: leadOpacity, y: leadY })}
+              className="absolute -bottom-6 right-0 md:-right-10 scale-75 md:scale-100 origin-bottom-right"
+            >
+              <LeadNotification />
+            </m.div>
+          </div>
+        </m.div>
       </div>
     </section>
   )

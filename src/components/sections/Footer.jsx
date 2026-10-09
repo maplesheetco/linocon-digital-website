@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Logo } from '../Logo'
 
 export default function Footer() {
@@ -8,16 +9,19 @@ export default function Footer() {
           <div className="flex flex-col gap-4">
             <Logo />
             <p className="text-sm text-text-tertiary max-w-xs">
-              Websites, SEO, and backlinks for brands that want a system, not a scramble.
+              <span className="block font-display font-bold text-base text-text mb-1">
+                Get found. Get chosen. Get growing.
+              </span>
+              Websites, SEO and backlinks for businesses that want more customers.
             </p>
           </div>
           <div className="flex flex-col gap-3">
             <span className="text-xs font-bold tracking-widest uppercase text-text-tertiary">
               Services
             </span>
-            <a href="#services" className="text-sm text-text-secondary">Website Builder</a>
-            <a href="#services" className="text-sm text-text-secondary">SEO Setup</a>
-            <a href="#services" className="text-sm text-text-secondary">Backlinks</a>
+            <a href="/#services" className="text-sm text-text-secondary">Website Builder</a>
+            <a href="/#services" className="text-sm text-text-secondary">SEO Setup</a>
+            <a href="/#services" className="text-sm text-text-secondary">Backlinks</a>
           </div>
           <div className="flex flex-col gap-3">
             <span className="text-xs font-bold tracking-widest uppercase text-text-tertiary">
@@ -26,17 +30,14 @@ export default function Footer() {
             <a href="mailto:hello@linocondigital.com" className="text-sm text-text-secondary">
               hello@linocondigital.com
             </a>
-            <span className="text-sm text-text-secondary">[Your City, Country]</span>
+            <Link to="/book" className="text-sm text-text-secondary">Book a strategy call</Link>
+            <Link to="/articles" className="text-sm text-text-secondary">Articles</Link>
           </div>
         </div>
         <div className="flex items-center justify-between flex-wrap gap-3 pt-7 border-t border-border">
           <span className="text-[13px] text-text-tertiary">
             &copy; {new Date().getFullYear()} LinoCon Digital. All rights reserved.
           </span>
-          <div className="flex gap-6">
-            <a href="#" className="text-[13px] text-text-tertiary">Privacy</a>
-            <a href="#" className="text-[13px] text-text-tertiary">Terms</a>
-          </div>
         </div>
       </div>
     </footer>

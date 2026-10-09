@@ -1,47 +1,27 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
+import { sendLead } from '../lib/leads'
 
 const CAL_COM_LINK = 'linocondigital/strategy-call'
-// TODO: replace with your real Web3Forms access key from web3forms.com
-const WEB3FORMS_ACCESS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY'
 
 export default function BookCall() {
-  const [status, setStatus] = useState('form') // 'form' | 'submitting' | 'scheduling' | 'error'
-  const [error, setError] = useState('')
+  const [status, setStatus] = useState('form') // 'form' | 'submitting' | 'scheduling'
 
   async function handleSubmit(e) {
     e.preventDefault()
     setStatus('submitting')
-    setError('')
 
     const form = e.target
-    const data = {
-      access_key: WEB3FORMS_ACCESS_KEY,
-      subject: 'New Strategy Call Request — LinoCon Digital',
+    // Email the details if forms are set up, but never block the booking on
+    // it: the calendar step collects name and email too.
+    await sendLead('New Strategy Call Request — LinoCon Digital', {
       name: form.name.value,
       email: form.email.value,
       company: form.company.value,
       goal: form.goal.value,
-    }
-
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      })
-      const result = await res.json()
-      if (result.success) {
-        setStatus('scheduling')
-      } else {
-        setError('Something went wrong sending your info. Please try again.')
-        setStatus('error')
-      }
-    } catch {
-      setError('Something went wrong sending your info. Please try again.')
-      setStatus('error')
-    }
+    })
+    setStatus('scheduling')
   }
 
   return (
@@ -63,7 +43,7 @@ export default function BookCall() {
           </p>
         </Reveal>
 
-        {(status === 'form' || status === 'submitting' || status === 'error') && (
+        {(status === 'form' || status === 'submitting') && (
           <Reveal delay={0.15}>
             <form onSubmit={handleSubmit} className="flex flex-col gap-5 max-w-lg">
               <Field label="Full name" name="name" type="text" required />
@@ -81,8 +61,6 @@ export default function BookCall() {
                   className="rounded-xl bg-surface border border-border px-4 py-3 text-base outline-none focus:border-blue transition-colors resize-none"
                 />
               </div>
-
-              {status === 'error' && <p className="text-sm text-orange">{error}</p>}
 
               <button
                 type="submit"

@@ -5,6 +5,8 @@ import Footer from './components/sections/Footer'
 import Home from './pages/Home'
 
 const BookCall = lazy(() => import('./pages/BookCall'))
+const Articles = lazy(() => import('./pages/Articles'))
+const Article = lazy(() => import('./pages/Article'))
 
 function App() {
   return (
@@ -18,6 +20,22 @@ function App() {
             element={
               <Suspense fallback={null}>
                 <BookCall />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/articles"
+            element={
+              <Suspense fallback={null}>
+                <Articles />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/articles/:slug"
+            element={
+              <Suspense fallback={null}>
+                <Article />
               </Suspense>
             }
           />

@@ -1,7 +1,7 @@
 ---
 title: What Are Backlinks, and Does My Business Need Them?
 description: Backlinks explained in plain English, why Google cares about them, and the safe ways for a small business to earn them.
-date: 2026-10-09
+date: 2026-10-20T09:00:00-07:00
 category: Backlinks
 ---
 
@@ -27,7 +27,7 @@ Quality beats quantity every time.
 
 If you want to rank in Google for searches your competitors also want, yes. Two businesses with equally good websites will often be separated by the strength of the sites linking to them.
 
-That said, backlinks come *after* the basics. If your website is slow, your pages are thin, or your Google Business Profile is empty, fix those first. We cover the basics in [SEO for Small Businesses: What to Do in Your First 90 Days](/articles/small-business-seo-first-90-days).
+That said, backlinks come *after* the basics. If your website is slow, your pages are thin, or your Google Business Profile is empty, fix those first. A complete Google Business Profile and clear service pages come first.
 
 ## Safe ways to earn good backlinks
 

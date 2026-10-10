@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { articles, getArticle, formatDate } from '../lib/articles'
 import usePageMeta from '../lib/usePageMeta'
 
 export default function Article() {
   const { slug } = useParams()
-  const article = getArticle(slug)
+  const [searchParams] = useSearchParams()
+  const article = getArticle(slug, { preview: searchParams.has('preview') })
   usePageMeta(article?.title ?? 'Article not found', article?.description)
 
   useEffect(() => {
@@ -49,6 +50,18 @@ export default function Article() {
             <p className="text-lg text-text-secondary mt-4">{article.description}</p>
           )}
         </header>
+
+        {article.image && (
+          <img
+            src={`${article.image}-1600.webp`}
+            srcSet={`${article.image}-800.webp 800w, ${article.image}-1600.webp 1600w`}
+            sizes="(min-width: 768px) 672px, 100vw"
+            width="1600"
+            height="837"
+            alt={article.imageAlt}
+            className="w-full h-auto rounded-2xl border border-border mb-12"
+          />
+        )}
 
         <div className="prose-article" dangerouslySetInnerHTML={{ __html: article.html }} />
 

@@ -26,8 +26,6 @@ function readingTime(text) {
   return Math.max(1, Math.round(words / 220))
 }
 
-const today = new Date().toISOString().slice(0, 10)
-
 const all = Object.entries(files)
   .map(([path, raw]) => {
     const slug = path.split('/').pop().replace(/\.md$/, '')
@@ -37,24 +35,33 @@ const all = Object.entries(files)
       title: data.title || slug,
       description: data.description || '',
       category: data.category || 'Guides',
-      date: data.date || today,
+      date: data.date || '1970-01-01',
+      image: data.image || '',
+      imageAlt: data.imageAlt || '',
       draft: data.draft === 'true',
       minutes: readingTime(body),
       html: marked.parse(body),
     }
   })
-  // Drafts and future-dated articles stay hidden until their date (after the next deploy).
-  .filter((a) => !a.draft && a.date <= today)
+  .filter((a) => !a.draft)
   .sort((a, b) => (a.date === b.date ? a.title.localeCompare(b.title) : b.date.localeCompare(a.date)))
 
-export const articles = all
-
-export function getArticle(slug) {
-  return all.find((a) => a.slug === slug)
+// Scheduled articles appear on their own once their date and time has passed, checked in the
+// visitor's browser, so no redeploy is needed. A date can include a time and zone,
+// e.g. 2026-10-13T09:00:00-07:00 (9 AM Pacific).
+function isPublished(article) {
+  return Date.parse(article.date) <= Date.now()
 }
 
-export function formatDate(iso) {
-  return new Date(`${iso}T12:00:00`).toLocaleDateString('en-US', {
+export const articles = all.filter(isPublished)
+
+// Adding ?preview to an article's URL shows it before its publish date.
+export function getArticle(slug, { preview = false } = {}) {
+  return all.find((a) => a.slug === slug && (preview || isPublished(a)))
+}
+
+export function formatDate(date) {
+  return new Date(`${date.slice(0, 10)}T12:00:00`).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

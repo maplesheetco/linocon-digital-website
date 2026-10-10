@@ -11,7 +11,7 @@ export default function CTA() {
   const opacity = useScrollRange(scrollYProgress, [0, 0.6], [0, 1])
 
   return (
-    <section id="contact" ref={ref} className="relative min-h-svh flex items-center border-t border-border overflow-hidden py-28">
+    <section id="contact" ref={ref} className="relative flex items-center border-t border-border overflow-hidden py-20 md:py-28">
       <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] rounded-full bg-gradient-brand opacity-20 blur-[140px]" />
       <m.div
         style={reduce ? undefined : { scale, opacity }}

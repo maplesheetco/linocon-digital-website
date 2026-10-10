@@ -54,45 +54,36 @@ function FooterLink({ link }) {
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-border pt-16 md:pt-24">
-      <div className="pointer-events-none absolute -bottom-40 left-1/2 -translate-x-1/2 w-[900px] h-[400px] rounded-full bg-blue opacity-[0.07] blur-[120px]" />
-
-      <div className="relative max-w-6xl mx-auto px-6 md:px-10">
-        <div className="grid lg:grid-cols-[1.3fr_2fr] gap-14 lg:gap-20 pb-14 md:pb-20">
-          <div className="flex flex-col items-start gap-6">
+    <footer className="border-t border-border pt-12 md:pt-14">
+      <div className="max-w-6xl mx-auto px-6 md:px-10">
+        <div className="grid lg:grid-cols-[1fr_1.6fr] gap-10 lg:gap-16 pb-10">
+          <div className="flex flex-col items-start gap-4">
             <Logo />
-            <p className="font-display font-bold text-2xl md:text-3xl leading-tight">
-              Get found. Get chosen.
-              <br />
-              Get <span className="text-gradient">growing.</span>
+            <p className="text-sm text-text-secondary leading-relaxed max-w-xs">
+              <span className="block font-display font-bold text-base text-text mb-1">
+                Get found. Get chosen. Get <span className="text-gradient">growing.</span>
+              </span>
+              Websites, SEO and backlinks for businesses that want more customers.
             </p>
-            <p className="text-sm text-text-secondary leading-relaxed max-w-sm">
-              Fast, custom websites with the SEO and backlinks to rank them, for businesses that
-              want more customers from Google.
-            </p>
-            <div className="flex flex-wrap items-center gap-3 pt-1">
+            <div className="flex flex-wrap items-center gap-2.5">
               <Link
                 to="/book"
-                className="flex items-center h-11 px-5 rounded-full bg-gradient-brand text-ink text-sm font-bold"
+                className="flex items-center h-9 px-4 rounded-full bg-gradient-brand text-ink text-[13px] font-bold"
               >
-                Book a free strategy call
+                Book a free call
               </Link>
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
-                className="flex items-center gap-2 h-11 px-5 rounded-full border border-white/15 text-sm font-bold hover:bg-white/5 transition-colors"
+                className="flex items-center h-9 px-4 rounded-full border border-white/15 text-[13px] font-bold hover:bg-white/5 transition-colors"
               >
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" strokeWidth="1.8" />
-                  <path d="M4 7l8 6 8-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
                 Email us
               </a>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-10">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
             {COLUMNS.map((col) => (
-              <div key={col.title} className="flex flex-col gap-3.5">
+              <div key={col.title} className="flex flex-col gap-2.5">
                 <span className="text-xs font-bold tracking-widest uppercase text-text-tertiary">
                   {col.title}
                 </span>
@@ -104,7 +95,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-7 border-t border-border">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 py-6 border-t border-border">
           <span className="text-[13px] text-text-tertiary">
             &copy; {new Date().getFullYear()} LinoCon Digital. All rights reserved.
           </span>
@@ -126,14 +117,6 @@ export default function Footer() {
               </svg>
             </a>
           </div>
-        </div>
-      </div>
-
-      <div aria-hidden="true" className="relative select-none overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6 md:px-10">
-          <span className="block font-display font-bold leading-[0.8] tracking-tight whitespace-nowrap text-[11.5vw] lg:text-[148px] text-transparent bg-clip-text bg-gradient-to-b from-white/[0.11] to-transparent translate-y-[18%]">
-            LinoCon Digital
-          </span>
         </div>
       </div>
     </footer>

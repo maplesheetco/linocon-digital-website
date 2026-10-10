@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LinoCon Digital — Get found. Get chosen. Get growing.</title>
     <meta name="description" content="Get found. Get chosen. Get growing. LinoCon Digital builds fast, conversion-ready websites and backs them with the SEO setup and backlinks that move you up Google." />
+    <!-- Google Analytics 4 (also lets Search Console verify the site).
+         Async, so it never blocks the page from showing. Page changes inside
+         the site are counted by GA4's built-in history-change tracking. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Loaded without blocking the first paint: the splash and page render

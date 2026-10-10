@@ -141,3 +141,13 @@ a {
   border-top: 1px solid var(--color-border);
   margin: 2.5em 0;
 }
+
+/* Fills a hero story step's bar over the time that step is shown. */
+@keyframes story-progress {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.story-progress {
+  animation: story-progress linear forwards;
+}

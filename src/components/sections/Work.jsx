@@ -2,7 +2,7 @@ import Reveal from '../Reveal'
 
 const img = (name) => `${import.meta.env.BASE_URL}images/${name}`
 
-const PROJECTS = [
+export const PROJECTS = [
   {
     name: 'MapleSheet Co.',
     url: 'https://www.maplesheet.ca',

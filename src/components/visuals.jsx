@@ -1,9 +1,9 @@
-// Service illustrations for the homepage and the service pages: pre-rendered
+// Service illustrations for the homepage: pre-rendered
 // WebP images in public/images, with a smaller copy for phones.
 
 const img = (name) => `${import.meta.env.BASE_URL}images/${name}`
 
-export function ServiceImage({ name, alt, eager = false }) {
+export function ServiceImage({ name, alt }) {
   return (
     <img
       src={img(`${name}-900.webp`)}
@@ -12,8 +12,7 @@ export function ServiceImage({ name, alt, eager = false }) {
       width="900"
       height="675"
       alt={alt}
-      loading={eager ? undefined : 'lazy'}
-      fetchPriority={eager ? 'high' : undefined}
+      loading="lazy"
       decoding="async"
       className="w-full max-w-lg h-auto"
     />

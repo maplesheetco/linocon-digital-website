@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import { m, useScroll, useReducedMotion } from 'framer-motion'
 import { useScrollRange } from '../../lib/scroll'
 import Reveal from '../Reveal'
+import useMediaQuery from '../../lib/useMediaQuery'
 
 const img = (name) => `${import.meta.env.BASE_URL}images/${name}`
 
@@ -101,24 +102,24 @@ function HorizontalTrack() {
 
 export default function Process() {
   const reduce = useReducedMotion()
+  const isDesktop = useMediaQuery('(min-width: 768px)')
   return (
     <section id="process" className="border-t border-border">
-      <div className={reduce ? 'py-28' : 'py-28 md:hidden'}>
-        <Reveal>
-          <Heading />
-        </Reveal>
-        <div className="max-w-6xl mx-auto px-6 md:px-10 grid md:grid-cols-2 gap-5">
-          {STEPS.map((s, i) => (
-            <Reveal key={s.n} delay={i * 0.08}>
-              <StepCard s={s} />
-            </Reveal>
-          ))}
+      {reduce || !isDesktop ? (
+        <div className="py-28">
+          <Reveal>
+            <Heading />
+          </Reveal>
+          <div className="max-w-6xl mx-auto px-6 md:px-10 grid md:grid-cols-2 gap-5">
+            {STEPS.map((s, i) => (
+              <Reveal key={s.n} delay={i * 0.08}>
+                <StepCard s={s} />
+              </Reveal>
+            ))}
+          </div>
         </div>
-      </div>
-      {!reduce && (
-        <div className="hidden md:block">
-          <HorizontalTrack />
-        </div>
+      ) : (
+        <HorizontalTrack />
       )}
     </section>
   )

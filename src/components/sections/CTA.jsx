@@ -12,7 +12,7 @@ export default function CTA() {
 
   return (
     <section id="contact" ref={ref} className="relative flex items-center border-t border-border overflow-hidden py-20 md:py-28">
-      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] rounded-full bg-gradient-brand opacity-20 blur-[140px]" />
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1180px] h-[780px] rounded-full opacity-25 bg-[radial-gradient(closest-side,color-mix(in_srgb,var(--color-blue)_50%,var(--color-orange)),transparent)]" />
       <m.div
         style={reduce ? undefined : { scale, opacity }}
         className="relative max-w-6xl mx-auto px-6 md:px-10 flex flex-col items-center text-center gap-8"

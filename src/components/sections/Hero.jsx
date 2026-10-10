@@ -29,8 +29,11 @@ export default function Hero() {
       <div
         className={`${reduce ? '' : 'sticky top-0 h-svh'} overflow-hidden flex flex-col items-center`}
       >
-        <div className="pointer-events-none absolute -top-40 -left-40 w-[560px] h-[560px] rounded-full bg-blue opacity-20 blur-[120px]" />
-        <div className="pointer-events-none absolute top-16 -right-48 w-[620px] h-[620px] rounded-full bg-orange opacity-15 blur-[140px]" />
+        {/* Soft glows drawn as radial gradients rather than blur() filters:
+            same look, but a big blur is slow for phone GPUs to repaint while
+            this pinned section scrolls. */}
+        <div className="pointer-events-none absolute -top-64 -left-64 w-[800px] h-[800px] rounded-full opacity-20 bg-[radial-gradient(closest-side,var(--color-blue),transparent)]" />
+        <div className="pointer-events-none absolute -top-12 -right-72 w-[880px] h-[880px] rounded-full opacity-15 bg-[radial-gradient(closest-side,var(--color-orange),transparent)]" />
 
         {/* Slide only, no fade: the headline is the page's largest element, and
             starting it at opacity 0 kept it invisible to visitors (and to

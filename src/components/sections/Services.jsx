@@ -12,7 +12,7 @@ import { LinksVisual, SeoVisual, WebVisual } from '../visuals'
 
 const SERVICES = [
   {
-    kicker: '01 — Website Builder',
+    kicker: '01 — Website Creation',
     title: 'Sites built to convert, not just exist.',
     body: 'Custom-built websites that load fast and turn visitors into leads. Not another templated theme.',
     points: ['Custom design for your brand', 'Built mobile-first', 'Enquiry forms and call booking built in'],
@@ -26,7 +26,7 @@ const SERVICES = [
     Visual: SeoVisual,
   },
   {
-    kicker: '03 — Backlinks',
+    kicker: '03 — Backlink Building',
     title: 'Authority that compounds, not spam that gets penalized.',
     body: 'High-authority backlinks that move your rankings, without the spammy links that get sites penalized.',
     points: ['High-authority placements', 'Relevant to your industry', 'No link farms, ever'],

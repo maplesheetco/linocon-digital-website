@@ -1,4 +1,5 @@
 import Hero from '../components/sections/Hero'
+import Benefits from '../components/sections/Benefits'
 import Statement from '../components/sections/Statement'
 import Services from '../components/sections/Services'
 import Work from '../components/sections/Work'
@@ -12,11 +13,12 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <Benefits />
       <Statement />
       <Services />
-      <Work />
       <Included />
       <Process />
+      <Work />
       <Audit />
       <FAQ />
       <CTA />

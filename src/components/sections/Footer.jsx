@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Logo } from '../Logo'
+import { CONTACT_EMAIL } from '../../lib/leads'
 
 export default function Footer() {
   return (
@@ -27,8 +28,8 @@ export default function Footer() {
             <span className="text-xs font-bold tracking-widest uppercase text-text-tertiary">
               Contact
             </span>
-            <a href="mailto:hello@linocondigital.com" className="text-sm text-text-secondary">
-              hello@linocondigital.com
+            <a href={`mailto:${CONTACT_EMAIL}`} className="text-sm text-text-secondary">
+              {CONTACT_EMAIL}
             </a>
             <Link to="/book" className="text-sm text-text-secondary">Book a strategy call</Link>
             <Link to="/articles" className="text-sm text-text-secondary">Articles</Link>

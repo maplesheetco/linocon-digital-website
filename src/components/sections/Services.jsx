@@ -8,31 +8,23 @@ import {
 } from 'framer-motion'
 import Reveal from '../Reveal'
 import useMediaQuery from '../../lib/useMediaQuery'
-import { LinksVisual, SeoVisual, WebVisual } from '../visuals'
+import { Link } from 'react-router-dom'
+import { ServiceImage } from '../visuals'
+import { SERVICES, servicePath } from '../../lib/services'
 
-const SERVICES = [
-  {
-    kicker: '01 — Website Creation',
-    title: 'Sites built to convert, not just exist.',
-    body: 'Custom-built websites that load fast and turn visitors into leads. Not another templated theme.',
-    points: ['Custom design for your brand', 'Built mobile-first', 'Enquiry forms and call booking built in'],
-    Visual: WebVisual,
-  },
-  {
-    kicker: '02 — SEO Setup',
-    title: 'A technical foundation Google can actually rank.',
-    body: 'Complete on-page and technical SEO, so Google understands what you do and who you serve.',
-    points: ['Keyword mapping', 'Site structure and metadata', 'Speed fixes'],
-    Visual: SeoVisual,
-  },
-  {
-    kicker: '03 — Backlink Building',
-    title: 'Authority that compounds, not spam that gets penalized.',
-    body: 'High-authority backlinks that move your rankings, without the spammy links that get sites penalized.',
-    points: ['High-authority placements', 'Relevant to your industry', 'No link farms, ever'],
-    Visual: LinksVisual,
-  },
-]
+function LearnMore({ s }) {
+  return (
+    <Link
+      to={servicePath(s)}
+      className="group inline-flex items-center gap-2 mt-2 text-sm font-bold text-text"
+    >
+      More about {s.name}
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="transition-transform group-hover:translate-x-1">
+        <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </Link>
+  )
+}
 
 function Points({ points }) {
   return (
@@ -93,6 +85,7 @@ function StickyStory() {
                 <h3 className="font-display font-bold text-4xl lg:text-5xl leading-tight">{s.title}</h3>
                 <p className="text-lg text-text-secondary leading-relaxed max-w-md">{s.body}</p>
                 <Points points={s.points} />
+                <LearnMore s={s} />
               </m.div>
             </AnimatePresence>
           </div>
@@ -105,7 +98,7 @@ function StickyStory() {
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="flex justify-center"
             >
-              <s.Visual />
+              <ServiceImage name={s.image} alt={s.alt} />
             </m.div>
           </AnimatePresence>
         </div>
@@ -122,9 +115,10 @@ function Stacked() {
         <h3 className="font-display font-bold text-3xl leading-tight">{s.title}</h3>
         <p className="text-lg text-text-secondary leading-relaxed">{s.body}</p>
         <Points points={s.points} />
+        <LearnMore s={s} />
       </Reveal>
       <Reveal className="flex justify-center" delay={0.1}>
-        <s.Visual />
+        <ServiceImage name={s.image} alt={s.alt} />
       </Reveal>
     </div>
   ))

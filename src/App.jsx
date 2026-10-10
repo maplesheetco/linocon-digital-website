@@ -7,6 +7,7 @@ import Home from './pages/Home'
 const BookCall = lazy(() => import('./pages/BookCall'))
 const Articles = lazy(() => import('./pages/Articles'))
 const Article = lazy(() => import('./pages/Article'))
+const Service = lazy(() => import('./pages/Service'))
 
 function App() {
   return (
@@ -20,6 +21,14 @@ function App() {
             element={
               <Suspense fallback={null}>
                 <BookCall />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/services/:slug"
+            element={
+              <Suspense fallback={null}>
+                <Service />
               </Suspense>
             }
           />

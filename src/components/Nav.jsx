@@ -1,18 +1,127 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Logo } from './Logo'
+import { SERVICES, servicePath } from '../lib/services'
 
 const LINKS = [
-  { href: '/#services', label: 'Services' },
   { href: '/#process', label: 'Process' },
   { href: '/#work', label: 'Work' },
   { href: '/#audit', label: 'Free audit' },
   { href: '/#faq', label: 'FAQ' },
 ]
 
+function Chevron({ open }) {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 12 12"
+      fill="none"
+      aria-hidden="true"
+      className={`transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
+    >
+      <path d="M2.5 4.5L6 8l3.5-3.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+// Desktop: opens on hover, or on click / Enter for touch screens and keyboards.
+function ServicesMenu() {
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+  // Set when a mouse hover opened the menu, so the click that usually follows
+  // doesn't immediately close it again.
+  const viaHover = useRef(false)
+  const location = useLocation()
+
+  useEffect(() => setOpen(false), [location])
+
+  useEffect(() => {
+    if (!open) return
+    const onDown = (e) => {
+      if (!ref.current?.contains(e.target)) setOpen(false)
+    }
+    const onKey = (e) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('pointerdown', onDown)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('pointerdown', onDown)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  return (
+    <div
+      ref={ref}
+      className="relative"
+      onPointerEnter={(e) => {
+        if (e.pointerType !== 'mouse') return
+        viaHover.current = true
+        setOpen(true)
+      }}
+      onPointerLeave={(e) => {
+        if (e.pointerType !== 'mouse') return
+        viaHover.current = false
+        setOpen(false)
+      }}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) setOpen(false)
+      }}
+    >
+      <button
+        type="button"
+        onClick={() => {
+          if (viaHover.current) viaHover.current = false
+          else setOpen((o) => !o)
+        }}
+        aria-expanded={open}
+        aria-haspopup="true"
+        className={`flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+          open ? 'text-text' : 'text-text-secondary hover:text-text'
+        }`}
+      >
+        Services
+        <Chevron open={open} />
+      </button>
+
+      {/* pt-4 bridges the gap under the button so the menu stays open while
+          the pointer moves down into it. */}
+      <div
+        className={`absolute left-1/2 -translate-x-1/2 top-full pt-4 transition-[opacity,transform] duration-200 ${
+          open ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1 pointer-events-none invisible'
+        }`}
+      >
+        <div className="w-[360px] rounded-2xl border border-border bg-ink/95 backdrop-blur-xl shadow-2xl shadow-black/60 p-2">
+          {SERVICES.map((s) => (
+            <Link
+              key={s.slug}
+              to={servicePath(s)}
+              className="flex flex-col gap-1 rounded-xl px-4 py-3 hover:bg-white/5 focus-visible:bg-white/5 transition-colors"
+            >
+              <span className="text-sm font-bold text-text">{s.name}</span>
+              <span className="text-[13px] leading-snug text-text-secondary">{s.menu}</span>
+            </Link>
+          ))}
+          <a
+            href="/#services"
+            onClick={() => setOpen(false)}
+            className="flex items-center justify-between mt-1 rounded-xl px-4 py-3 border-t border-border text-[13px] font-bold text-text-secondary hover:text-text transition-colors"
+          >
+            See all services
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [servicesOpen, setServicesOpen] = useState(false)
   const location = useLocation()
 
   useEffect(() => {
@@ -22,7 +131,10 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  useEffect(() => setOpen(false), [location])
+  useEffect(() => {
+    setOpen(false)
+    setServicesOpen(false)
+  }, [location])
 
   const solid = scrolled || open
 
@@ -40,6 +152,7 @@ export default function Nav() {
         </Link>
 
         <nav className="hidden lg:flex items-center gap-8">
+          <ServicesMenu />
           {LINKS.map((l) => (
             <a
               key={l.href}
@@ -84,7 +197,35 @@ export default function Nav() {
       </div>
 
       {open && (
-        <nav className="lg:hidden border-t border-border px-5 pb-6 pt-2 flex flex-col">
+        <nav className="lg:hidden border-t border-border px-5 pb-6 pt-2 flex flex-col max-h-[calc(100svh-4rem)] overflow-y-auto">
+          <div className="border-b border-border">
+            <button
+              type="button"
+              onClick={() => setServicesOpen((o) => !o)}
+              aria-expanded={servicesOpen}
+              className="w-full flex items-center justify-between py-4 text-lg font-semibold"
+            >
+              Services
+              <Chevron open={servicesOpen} />
+            </button>
+            {servicesOpen && (
+              <div className="flex flex-col pb-3 pl-4 border-l border-white/15 ml-1 mb-2">
+                {SERVICES.map((s) => (
+                  <Link key={s.slug} to={servicePath(s)} className="py-2.5 flex flex-col">
+                    <span className="text-base font-semibold">{s.name}</span>
+                    <span className="text-sm text-text-secondary">{s.menu}</span>
+                  </Link>
+                ))}
+                <a
+                  href="/#services"
+                  onClick={() => setOpen(false)}
+                  className="py-2.5 text-sm font-bold text-text-secondary"
+                >
+                  See all services &rarr;
+                </a>
+              </div>
+            )}
+          </div>
           {LINKS.map((l) => (
             <a
               key={l.href}

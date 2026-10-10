@@ -1,8 +1,8 @@
-// Form submissions are emailed through Web3Forms. Get a free access key at
-// web3forms.com (sign up with the inbox you want leads sent to) and paste it
-// here. Until then, forms fall back to opening the visitor's email app.
-export const WEB3FORMS_ACCESS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY'
-export const CONTACT_EMAIL = 'hello@linocondigital.com'
+// Form submissions are emailed through Web3Forms to linocondigital@gmail.com.
+// The access key is public by design (Web3Forms keys are meant for client-side
+// code). If a send fails, forms fall back to opening the visitor's email app.
+export const WEB3FORMS_ACCESS_KEY = 'a4cac5a0-c340-475d-b1a5-6c0fdc7dd992'
+export const CONTACT_EMAIL = 'linocondigital@gmail.com'
 
 const formsConfigured = !WEB3FORMS_ACCESS_KEY.startsWith('YOUR_')
 

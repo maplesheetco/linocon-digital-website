@@ -3,20 +3,44 @@ import { m, useScroll, useReducedMotion } from 'framer-motion'
 import { useScrollRange } from '../../lib/scroll'
 import Reveal from '../Reveal'
 
+const img = (name) => `${import.meta.env.BASE_URL}images/${name}`
+
 const STEPS = [
-  { n: '01', title: 'Audit', body: "We review your current site, rankings and competitors to find exactly what's holding you back." },
-  { n: '02', title: 'Plan', body: 'You get a clear plan: the pages, the keywords and the links worth chasing, agreed before work starts.' },
-  { n: '03', title: 'Build & launch', body: 'We design and build your site with SEO baked in, then launch it.' },
-  { n: '04', title: 'Grow', body: 'Ongoing SEO and backlinks, with regular reporting, so rankings and enquiries keep climbing.' },
+  { n: '01', image: 'process-audit', title: 'Audit', body: "We review your current site, rankings and competitors to find exactly what's holding you back." },
+  { n: '02', image: 'process-plan', title: 'Plan', body: 'You get a clear plan: the pages, the keywords and the links worth chasing, agreed before work starts.' },
+  { n: '03', image: 'process-build', title: 'Build & launch', body: 'We design and build your site with SEO baked in, then launch it.' },
+  { n: '04', image: 'process-grow', title: 'Grow', body: 'Ongoing SEO and backlinks, with regular reporting, so rankings and enquiries keep climbing.' },
 ]
 
 function StepCard({ s }) {
   return (
-    <div className="flex flex-col gap-5 rounded-3xl bg-surface border border-border p-8 md:p-10 md:w-[min(520px,40vw)] md:h-[420px] shrink-0">
+    <div className="relative isolate overflow-hidden flex flex-col gap-5 rounded-3xl bg-surface border border-border p-8 md:p-10 min-h-[440px] md:min-h-0 md:w-[min(520px,40vw)] md:h-[420px] shrink-0">
+      <img
+        src={img(`${s.image}-1040.webp`)}
+        srcSet={`${img(`${s.image}-600.webp`)} 600w, ${img(`${s.image}-1040.webp`)} 1040w`}
+        sizes="(min-width: 768px) 520px, 100vw"
+        width="1040"
+        height="840"
+        alt=""
+        loading="lazy"
+        decoding="async"
+        className="absolute inset-0 -z-20 w-full h-full object-cover object-right"
+      />
+      {/* Dark fade so the text stays readable over busy, bright images:
+          heaviest behind the text at the top left, lighter where the
+          picture's subject sits at the bottom right. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10"
+        style={{
+          background:
+            'linear-gradient(180deg, rgba(11,11,16,0.88) 0%, rgba(11,11,16,0.74) 45%, rgba(11,11,16,0.2) 100%), linear-gradient(90deg, rgba(11,11,16,0.55) 0%, rgba(11,11,16,0) 70%)',
+        }}
+      />
       <div className="h-[3px] w-16 rounded-full bg-gradient-brand" />
-      <span className="font-display font-bold text-6xl md:text-7xl text-white/10">{s.n}</span>
+      <span className="font-display font-bold text-6xl md:text-7xl text-white/25">{s.n}</span>
       <h3 className="font-display font-bold text-2xl md:text-3xl">{s.title}</h3>
-      <p className="text-text-secondary leading-relaxed md:text-lg">{s.body}</p>
+      <p className="text-text leading-relaxed md:text-lg max-w-[34ch]">{s.body}</p>
     </div>
   )
 }

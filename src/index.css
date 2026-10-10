@@ -24,13 +24,16 @@
 }
 
 html {
+  background: var(--color-ink);
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
 }
 
+/* The page colour lives on <html> only: a body background would paint over
+   the cursor backlight (CursorGlow.jsx), which sits behind everything. */
 body {
   margin: 0;
-  background: var(--color-ink);
+  background: transparent;
   color: var(--color-text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -150,4 +153,30 @@ a {
 
 .story-progress {
   animation: story-progress linear forwards;
+}
+
+/* Backlight that follows the cursor / finger (CursorGlow.jsx). A gradient,
+   not blur(), so it costs phones nothing to paint. */
+.cursor-glow {
+  width: 720px;
+  height: 720px;
+  background: radial-gradient(
+    closest-side,
+    rgb(46 107 255 / 0.26),
+    rgb(124 92 255 / 0.12) 45%,
+    transparent
+  );
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursor-glow {
+    width: 460px;
+    height: 460px;
+    background: radial-gradient(
+      closest-side,
+      rgb(46 107 255 / 0.36),
+      rgb(124 92 255 / 0.16) 45%,
+      transparent
+    );
+  }
 }

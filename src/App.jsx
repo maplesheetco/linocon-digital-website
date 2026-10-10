@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Nav from './components/Nav'
+import CursorGlow from './components/CursorGlow'
 import Footer from './components/sections/Footer'
 import Home from './pages/Home'
 
@@ -12,6 +13,7 @@ const Service = lazy(() => import('./pages/Service'))
 function App() {
   return (
     <>
+      <CursorGlow />
       <Nav />
       <main>
         <Routes>

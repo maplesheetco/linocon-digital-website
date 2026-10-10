@@ -1,14 +1,13 @@
 import { Link } from 'react-router-dom'
 import { Logo } from '../Logo'
 import { CONTACT_EMAIL } from '../../lib/leads'
+import { SERVICES, servicePath } from '../../lib/services'
 
 const COLUMNS = [
   {
     title: 'Services',
     links: [
-      { href: '/#services', label: 'Website design & build' },
-      { href: '/#services', label: 'SEO setup' },
-      { href: '/#services', label: 'Backlinks' },
+      ...SERVICES.map((s) => ({ to: servicePath(s), label: s.name })),
       { href: '/#audit', label: 'Free website audit' },
     ],
   },

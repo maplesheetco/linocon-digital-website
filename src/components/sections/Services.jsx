@@ -7,6 +7,7 @@ import {
   useReducedMotion,
 } from 'framer-motion'
 import Reveal from '../Reveal'
+import useMediaQuery from '../../lib/useMediaQuery'
 import { LinksVisual, SeoVisual, WebVisual } from '../visuals'
 
 const SERVICES = [
@@ -131,6 +132,7 @@ function Stacked() {
 
 export default function Services() {
   const reduce = useReducedMotion()
+  const isDesktop = useMediaQuery('(min-width: 768px)')
   return (
     <section id="services" className="pt-28 md:pt-36">
       <Reveal className="max-w-6xl mx-auto px-6 md:px-10 pb-16 md:pb-8">
@@ -139,14 +141,7 @@ export default function Services() {
           Three services. One growth system.
         </h2>
       </Reveal>
-      <div className={reduce ? '' : 'md:hidden'}>
-        <Stacked />
-      </div>
-      {!reduce && (
-        <div className="hidden md:block">
-          <StickyStory />
-        </div>
-      )}
+      {reduce || !isDesktop ? <Stacked /> : <StickyStory />}
     </section>
   )
 }
